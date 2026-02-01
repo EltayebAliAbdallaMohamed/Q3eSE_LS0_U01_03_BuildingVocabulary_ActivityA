@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alan's Daily Activities</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    color: #333;
+  }
+  main {
+    max-width: 600px;
+    background: white;
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  h1 { text-align: center; color: #0078d4; }
+  audio {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  .question { font-weight: bold; margin: 1em 0 0.5em 0; }
+  .options label {
+    display: block;
+    margin: 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  input[type="radio"] { margin-right: 10px; }
+  .buttons {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .buttons button {
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid #0078d4;
+    background: white;
+    color: #0078d4;
+  }
+  .buttons button:hover { background: #0078d4; color: white; }
+  .feedback { margin-top: 0.5em; font-weight: bold; }
+  .question-counter { margin-top: 0.5em; font-style: italic; color: #555; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Alan's Daily Activities</h1>
+  <p>Read the script, listen to the audio, and answer the questions.</p>
+
+  <!-- Audio Player -->
+  <audio id="audioPlayer" controls>
+    <source src="Q3eSE_LS0_U01_03_BuildingVocabulary_ActivityA.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Text for reading -->
+  <details id="textDetails">
+    <summary>Click here to start, show or hide the script.</summary>
+    <p>
+      Alan lives in Toronto. He works at the after-school program at the community center in his town.
+      Children come to the community center after school. Alan does many activities with them.
+      It’s a good job for him because he is interested in a lot of different things. He is good at sports.
+      On sunny days, Alan and the kids ride bikes or go hiking. Sometimes they go to the beach or the park.
+      On rainy days, Alan and the kids listen to podcasts, or they play games like Scrabble and checkers.
+      Sometimes they go to a museum together. After work, Alan sometimes gets together with friends, but he usually goes home to relax and read a book.
+    </p>
+  </details>
+
+  <!-- Quiz -->
+  <div id="quiz">
+    <p class="question-counter" id="questionCounter"></p>
+    <p class="question" id="questionText"></p>
+    <div class="options" id="optionsContainer"></div>
+    <p class="feedback" id="feedback"></p>
+    <div class="buttons">
+      <button id="prevBtn">Previous</button>
+      <button id="checkBtn">Check Answer</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+</main>
+
+<script>
+const questions = [
+  { question: "Where does Alan live?", options: ["Toronto", "Vancouver", "Montreal"], answer: 0 },
+  { question: "Where does Alan work?", options: ["Library", "Community center", "School cafeteria"], answer: 1 },
+  { question: "Who comes to the community center after school?", options: ["Teenagers", "Children", "Adults"], answer: 1 },
+  { question: "Which activity does Alan do on sunny days?", options: ["Ride bikes or go hiking", "Listen to podcasts", "Play Scrabble"], answer: 0 },
+  { question: "Which activity does Alan do on rainy days?", options: ["Go hiking", "Play games or listen to podcasts", "Go to the beach"], answer: 1 },
+  { question: "Sometimes Alan and the kids go together to:", options: ["The library", "The museum", "The supermarket"], answer: 1 },
+  { question: "After work, Alan usually:", options: ["Goes home to relax and read a book", "Works overtime", "Goes swimming"], answer: 0 }
+];
+
+let currentQuestionIndex = 0;
+let quizEnabled = false;
+
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const feedback = document.getElementById("feedback");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const checkBtn = document.getElementById("checkBtn");
+const questionCounter = document.getElementById("questionCounter");
+const textDetails = document.getElementById("textDetails");
+const audioPlayer = document.getElementById("audioPlayer");
+
+// Disable quiz initially
+document.getElementById("quiz").querySelectorAll("button, input").forEach(el => el.disabled = true);
+
+// Enable quiz after reading or listening
+textDetails.addEventListener("toggle", () => { if(textDetails.open) enableQuiz(); });
+audioPlayer.addEventListener("ended", enableQuiz);
+
+function enableQuiz(){
+  quizEnabled = true;
+  document.getElementById("quiz").querySelectorAll("button, input").forEach(el => el.disabled = false);
+}
+
+function displayQuestion() {
+  const q = questions[currentQuestionIndex];
+  questionText.textContent = q.question;
+  optionsContainer.innerHTML = "";
+  feedback.textContent = "";
+  questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+  q.options.forEach((opt, idx) => {
+    const label = document.createElement("label");
+    label.innerHTML = `<input type="radio" name="option" value="${idx}" ${!quizEnabled ? "disabled" : ""}> ${opt}`;
+    optionsContainer.appendChild(label);
+  });
+
+  prevBtn.disabled = currentQuestionIndex === 0 || !quizEnabled;
+  nextBtn.disabled = currentQuestionIndex === questions.length - 1 || !quizEnabled;
+}
+
+checkBtn.addEventListener("click", () => {
+  if(!quizEnabled) return;
+  const selected = document.querySelector('input[name="option"]:checked');
+  if (!selected) {
+    feedback.textContent = "❌ Please select an option!";
+    feedback.style.color = "orange";
+    return;
+  }
+  const answerIdx = parseInt(selected.value);
+  if (answerIdx === questions[currentQuestionIndex].answer) {
+    feedback.textContent = "✅ Correct!";
+    feedback.style.color = "green";
+  } else {
+    feedback.textContent = "❌ Try again!";
+    feedback.style.color = "red";
+  }
+});
+
+prevBtn.addEventListener("click", () => {
+  if(currentQuestionIndex > 0){
+    currentQuestionIndex--;
+    displayQuestion();
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  if(currentQuestionIndex < questions.length - 1){
+    currentQuestionIndex++;
+    displayQuestion();
+  }
+});
+
+// Initialize
+displayQuestion();
+</script>
+</body>
+</html>
