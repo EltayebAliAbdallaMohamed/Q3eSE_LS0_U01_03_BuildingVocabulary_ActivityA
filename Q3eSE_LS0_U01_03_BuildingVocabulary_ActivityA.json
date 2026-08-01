@@ -26,6 +26,20 @@
       "answer": "",
       "Image": ""
     },
+    
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "He works at the after-school program at the community center in his town.",
+      "arabic": "يعمل في برنامج ما بعد المدرسة في المركز المجتمعي في بلدته",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/He works at the after-school program at the community center in his town.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
     {
       "speaker": "Narrator:",
       "keyWord": "",
@@ -65,6 +79,35 @@
       "answer": "",
       "Image": ""
     },
+   
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "Children come to the community center",
+      "arabic": "يأتي الأطفال إلى المركز المجتمعي.",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/Children come to the community center.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "after school.",
+      "arabic": " بعد المدرسة",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/after school.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
+
+ 
     {
       "speaker": "Narrator:",
       "keyWord": "",
@@ -74,6 +117,20 @@
       "refer_to": "",
       "back_to": "",
       "audio": "assets/audio/Alan does many activities with them.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
+    
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "It is a good job for him because he is interested in a lot of different things.",
+      "arabic": "إنها وظيفة جيدة بالنسبة له لأنه مهتم بالعديد من الأشياء المختلفة.",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/It is a good job for him because he is interested in a lot of different things.mp3",
       "audioQuestion": "",
       "answer": "",
       "Image": ""
@@ -121,6 +178,20 @@
       "speaker": "Narrator:",
       "keyWord": "",
       "definition": "",
+      "english": "On sunny days, Alan and the kids ride bikes or go hiking.",
+      "arabic": "في الأيام المشمسة، يركب آلان والأطفال الدراجات أو يذهبون في رحلات المشي لمسافات طويلة.",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/On sunny days, Alan and the kids ride bikes or go hiking.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
+    
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
       "english": "On sunny days",
       "arabic": "في الأيام المشمسة",
       "refer_to": "",
@@ -152,6 +223,20 @@
       "refer_to": "",
       "back_to": "",
       "audio": "assets/audio/Sometimes they go to the beach or the park.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
+    
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "On rainy days, Alan and the kids listen to podcasts, or they play games like Scrabble and checkers",
+      "arabic": "في الأيام الممطرة، يستمع آلان والأطفال إلى البودكاست، أو يلعبون ألعابًا مثل سكرابل والداما.",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/On rainy days, Alan and the kids listen to podcasts, or they play games like Scrabble and checkers.mp3",
       "audioQuestion": "",
       "answer": "",
       "Image": ""

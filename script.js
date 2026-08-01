@@ -151,6 +151,61 @@ speakScrambledCheckbox.addEventListener("change", function () {
   }
 });
 
+
+
+function seqRange(input) {
+
+  let seq = input.split("-")[0];
+  seq = seq.split(",").map(Number);
+
+  let rnge = input.split(",").pop();
+  const startingRange = rnge.split("-")[0];
+  const endingRange = rnge.split("-")[1];
+
+  rnge = range(Number(startingRange), Number(endingRange));
+  const combined = [...seq, ...rnge];
+
+  return [...new Set(combined)];
+    
+}
+
+// ========== LOOKUP TEXT FUNCTION ==========
+
+// takes the sentence(dct) from the scripts and compares each word in it to the keyword(chk) to double check 
+// function doubleCheck(dct, chk) {
+//     const words = dct.split(" ");
+
+//     for (const word of words) {
+//         if (word === chk) {
+//             return true;
+//         }
+//     }
+
+//     return false;
+// }
+
+  function lookupText(txt) {
+    const numScripts = [];
+    const re = new RegExp(`\\b${txt}\\b`);
+
+
+    for (const [i, sentence] of Sentences.entries()) {
+      
+      if (re.test(sentence.english.toLowerCase())){        
+        numScripts.push(i);
+}
+    };
+    if (numScripts.length === 0){
+      //console.log("none is found")
+      alert("There aren't any scripts that contain this keyword ")
+      return "alert"
+    }
+     
+    return numScripts;
+     
+}
+
+
 // ========== PLAYLIST MODE FUNCTIONS ==========
 function buildDefaultNav() {
   navIndices = Array.from({ length: Sentences.length }, (_, i) => i);
@@ -158,11 +213,44 @@ function buildDefaultNav() {
   usePlayListMode = false;
 }
 
+// creating an array from the user's input (in the case a hyphen is used)
+function range(start, end) {
+    return Array.from(
+        { length: end - start + 1 },
+        (_, i) => start + i
+    );
+}
+
 function parsePlayListInput(text) {
-  const tokens = text.split(",").map(t => t.trim()).filter(Boolean);
+  
   const indices = [];
   const seen = new Set();
 
+  if (!text) return [];
+  
+  else if (text.includes("-") && text.includes(",")){
+    return seqRange(text)
+  }
+  else if (text.includes("-")) {
+    var tokens = text.split("-").map(t => t.trim()).filter(Boolean);
+
+    let start = parseInt(tokens[0], 10);
+    if (start === 0){
+      start = 1;
+    }
+    let end = parseInt(tokens[1], 10);
+
+    if (start > end || start === end) {
+      alert("the starting range shouldn't be smaller or equal than the end parameter, recheck the provided range");
+      return 'alert';
+    };
+
+  return range(start - 1, end - 1);
+    
+} else if (text.includes(",")) {
+    var tokens = text.split(",").map(t => t.trim()).filter(Boolean);
+
+    
   tokens.forEach(tok => {
     const n = parseInt(tok, 10);
     if (!Number.isFinite(n)) return;
@@ -177,12 +265,19 @@ function parsePlayListInput(text) {
   });
 
   return indices;
+}else if (typeof text === "string"){
+  console.log("got a string");
+  return lookupText(text.toLowerCase());
+  }
+  
+
+  
 }
 
 function enablePlaylistMode() {
   const indices = parsePlayListInput(playList.value);
 
-  if (indices.length === 0) {
+  if (indices.length === 0 || !'alert') {
     usePlayListCheckbox.checked = false;
     alert("Playlist is empty or invalid. Enter numbers like: 1, 3, 5");
     return;
