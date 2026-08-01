@@ -280,6 +280,34 @@
       "answer": "",
       "Image": ""
     },
+    
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "Sometimes they go to a museum together",
+      "arabic": "أحيانًا يذهبون إلى متحف معًا.",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/Sometimes they go to a museum together.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
+    
+    {
+      "speaker": "Narrator:",
+      "keyWord": "",
+      "definition": "",
+      "english": "After work, Alan sometimes gets together with friends, but he usually goes home to relax and read a book",
+      "arabic": "بعد العمل، أحيانًا يلتقي آلان مع أصدقائه، لكنه عادةً يذهب إلى المنزل لكي يسترخي و يقرأ كتابا  .",
+      "refer_to": "",
+      "back_to": "",
+      "audio": "assets/audio/After work, Alan sometimes gets together with friends, but he usually goes home to relax and read a book.mp3",
+      "audioQuestion": "",
+      "answer": "",
+      "Image": ""
+    },
     {
       "speaker": "Narrator:",
       "keyWord": "",
